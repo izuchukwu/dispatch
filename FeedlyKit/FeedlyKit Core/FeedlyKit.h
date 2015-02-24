@@ -10,5 +10,6 @@
 #define FeedlyKit_FeedlyKit_h
 
 #import "FKCloud.h"
+#import "UAObfuscatedString.h"
 
 #endif

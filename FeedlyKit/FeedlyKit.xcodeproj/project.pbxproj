@@ -30,6 +30,13 @@
 		869F90721A9C57C20096FC30 /* NXOAuth2Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90611A9C57C20096FC30 /* NXOAuth2Request.m */; };
 		869F907F1A9C58150096FC30 /* FKAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F907A1A9C58150096FC30 /* FKAuthViewController.m */; };
 		869F90801A9C58150096FC30 /* FKCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F907D1A9C58150096FC30 /* FKCloud.m */; };
+		869F90861A9C6BCD0096FC30 /* UAObfuscatedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90841A9C6BCD0096FC30 /* UAObfuscatedString.m */; };
+		869F908A1A9C6CDD0096FC30 /* FKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90891A9C6CDD0096FC30 /* FKCategory.m */; };
+		869F908D1A9C6DB40096FC30 /* FKStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F908C1A9C6DB40096FC30 /* FKStream.m */; };
+		869F90901A9C6F790096FC30 /* FKFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F908F1A9C6F790096FC30 /* FKFeed.m */; };
+		869F90931A9C70D80096FC30 /* FKArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90921A9C70D80096FC30 /* FKArticle.m */; };
+		869F909C1A9C99D90096FC30 /* ICNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90981A9C99D90096FC30 /* ICNetworking.m */; };
+		869F909D1A9C99D90096FC30 /* ICNetworkingQueuedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F909B1A9C99D90096FC30 /* ICNetworkingQueuedItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +102,23 @@
 		869F907C1A9C58150096FC30 /* FKCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FKCloud.h; sourceTree = "<group>"; };
 		869F907D1A9C58150096FC30 /* FKCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FKCloud.m; sourceTree = "<group>"; };
 		869F907E1A9C58150096FC30 /* FKCloudConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FKCloudConstants.h; sourceTree = "<group>"; };
+		869F90831A9C6BCD0096FC30 /* UAObfuscatedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAObfuscatedString.h; sourceTree = "<group>"; };
+		869F90841A9C6BCD0096FC30 /* UAObfuscatedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAObfuscatedString.m; sourceTree = "<group>"; };
+		869F90881A9C6CDD0096FC30 /* FKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FKCategory.h; path = "FeedlyKit Core/Items/FKCategory.h"; sourceTree = SOURCE_ROOT; };
+		869F90891A9C6CDD0096FC30 /* FKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FKCategory.m; path = "FeedlyKit Core/Items/FKCategory.m"; sourceTree = SOURCE_ROOT; };
+		869F908B1A9C6DB40096FC30 /* FKStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FKStream.h; path = "FeedlyKit Core/Items/FKStream.h"; sourceTree = SOURCE_ROOT; };
+		869F908C1A9C6DB40096FC30 /* FKStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FKStream.m; path = "FeedlyKit Core/Items/FKStream.m"; sourceTree = SOURCE_ROOT; };
+		869F908E1A9C6F790096FC30 /* FKFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FKFeed.h; path = "FeedlyKit Core/Items/FKFeed.h"; sourceTree = SOURCE_ROOT; };
+		869F908F1A9C6F790096FC30 /* FKFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FKFeed.m; path = "FeedlyKit Core/Items/FKFeed.m"; sourceTree = SOURCE_ROOT; };
+		869F90911A9C70D80096FC30 /* FKArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FKArticle.h; path = "FeedlyKit Core/Items/FKArticle.h"; sourceTree = SOURCE_ROOT; };
+		869F90921A9C70D80096FC30 /* FKArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FKArticle.m; path = "FeedlyKit Core/Items/FKArticle.m"; sourceTree = SOURCE_ROOT; };
+		869F90941A9C73360096FC30 /* FKItems.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FKItems.h; path = "FeedlyKit Core/Items/FKItems.h"; sourceTree = SOURCE_ROOT; };
+		869F90951A9C80080096FC30 /* FKItemConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FKItemConstants.h; path = "FeedlyKit Core/Items/FKItemConstants.h"; sourceTree = SOURCE_ROOT; };
+		869F90971A9C99D90096FC30 /* ICNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNetworking.h; sourceTree = "<group>"; };
+		869F90981A9C99D90096FC30 /* ICNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICNetworking.m; sourceTree = "<group>"; };
+		869F90991A9C99D90096FC30 /* ICNetworkingCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNetworkingCommon.h; sourceTree = "<group>"; };
+		869F909A1A9C99D90096FC30 /* ICNetworkingQueuedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNetworkingQueuedItem.h; sourceTree = "<group>"; };
+		869F909B1A9C99D90096FC30 /* ICNetworkingQueuedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICNetworkingQueuedItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +221,8 @@
 		869F903E1A9C57A90096FC30 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				869F90961A9C99D90096FC30 /* ICNetworking */,
+				869F90811A9C6BCD0096FC30 /* UAObfuscatedString */,
 				869F90421A9C57C20096FC30 /* OAuth2Client */,
 			);
 			name = Libraries;
@@ -269,8 +295,9 @@
 			isa = PBXGroup;
 			children = (
 				869F90771A9C58150096FC30 /* FeedlyKit.h */,
-				869F90781A9C58150096FC30 /* FKAuthViewController */,
 				869F907B1A9C58150096FC30 /* FKCloud */,
+				869F90871A9C6C6B0096FC30 /* Items */,
+				869F90781A9C58150096FC30 /* FKAuthViewController */,
 			);
 			path = "FeedlyKit Core";
 			sourceTree = "<group>";
@@ -292,6 +319,45 @@
 				869F907D1A9C58150096FC30 /* FKCloud.m */,
 			);
 			path = FKCloud;
+			sourceTree = "<group>";
+		};
+		869F90811A9C6BCD0096FC30 /* UAObfuscatedString */ = {
+			isa = PBXGroup;
+			children = (
+				869F90831A9C6BCD0096FC30 /* UAObfuscatedString.h */,
+				869F90841A9C6BCD0096FC30 /* UAObfuscatedString.m */,
+			);
+			path = UAObfuscatedString;
+			sourceTree = "<group>";
+		};
+		869F90871A9C6C6B0096FC30 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				869F90941A9C73360096FC30 /* FKItems.h */,
+				869F90951A9C80080096FC30 /* FKItemConstants.h */,
+				869F908B1A9C6DB40096FC30 /* FKStream.h */,
+				869F908C1A9C6DB40096FC30 /* FKStream.m */,
+				869F90881A9C6CDD0096FC30 /* FKCategory.h */,
+				869F90891A9C6CDD0096FC30 /* FKCategory.m */,
+				869F908E1A9C6F790096FC30 /* FKFeed.h */,
+				869F908F1A9C6F790096FC30 /* FKFeed.m */,
+				869F90911A9C70D80096FC30 /* FKArticle.h */,
+				869F90921A9C70D80096FC30 /* FKArticle.m */,
+			);
+			name = Items;
+			path = FKCloud;
+			sourceTree = "<group>";
+		};
+		869F90961A9C99D90096FC30 /* ICNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				869F90991A9C99D90096FC30 /* ICNetworkingCommon.h */,
+				869F90971A9C99D90096FC30 /* ICNetworking.h */,
+				869F90981A9C99D90096FC30 /* ICNetworking.m */,
+				869F909A1A9C99D90096FC30 /* ICNetworkingQueuedItem.h */,
+				869F909B1A9C99D90096FC30 /* ICNetworkingQueuedItem.m */,
+			);
+			path = ICNetworking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -394,12 +460,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				869F909D1A9C99D90096FC30 /* ICNetworkingQueuedItem.m in Sources */,
 				869F90671A9C57C20096FC30 /* NSString+NXOAuth2.m in Sources */,
 				869F907F1A9C58150096FC30 /* FKAuthViewController.m in Sources */,
 				869F906C1A9C57C20096FC30 /* NXOAuth2Client.m in Sources */,
+				869F908D1A9C6DB40096FC30 /* FKStream.m in Sources */,
+				869F90901A9C6F790096FC30 /* FKFeed.m in Sources */,
+				869F909C1A9C99D90096FC30 /* ICNetworking.m in Sources */,
 				869F901F1A9C57880096FC30 /* ViewController.m in Sources */,
+				869F90931A9C70D80096FC30 /* FKArticle.m in Sources */,
 				869F906F1A9C57C20096FC30 /* NXOAuth2FileStreamWrapper.m in Sources */,
 				869F90711A9C57C20096FC30 /* NXOAuth2PostBodyStream.m in Sources */,
+				869F90861A9C6BCD0096FC30 /* UAObfuscatedString.m in Sources */,
 				869F906A1A9C57C20096FC30 /* NXOAuth2Account.m in Sources */,
 				869F906E1A9C57C20096FC30 /* NXOAuth2Constants.m in Sources */,
 				869F90801A9C58150096FC30 /* FKCloud.m in Sources */,
@@ -407,6 +479,7 @@
 				869F90701A9C57C20096FC30 /* NXOAuth2PostBodyPart.m in Sources */,
 				869F901C1A9C57880096FC30 /* AppDelegate.m in Sources */,
 				869F90681A9C57C20096FC30 /* NSURL+NXOAuth2.m in Sources */,
+				869F908A1A9C6CDD0096FC30 /* FKCategory.m in Sources */,
 				869F90191A9C57880096FC30 /* main.m in Sources */,
 				869F90691A9C57C20096FC30 /* NXOAuth2AccessToken.m in Sources */,
 				869F906B1A9C57C20096FC30 /* NXOAuth2AccountStore.m in Sources */,
@@ -606,6 +679,7 @@
 				869F90381A9C57880096FC30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		869F90391A9C57880096FC30 /* Build configuration list for PBXNativeTarget "FeedlyKitTests" */ = {
 			isa = XCConfigurationList;
@@ -614,6 +688,7 @@
 				869F903B1A9C57880096FC30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

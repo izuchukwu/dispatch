@@ -273,19 +273,15 @@ NSString * const kNXOAuth2AccountStoreAccountType = @"kNXOAuth2AccountStoreAccou
           tokenType:(NSString *)aTokenType
      forAccountType:(NSString *)anAccountType;
 {
-    NSDictionary *conf = [NSDictionary dictionaryWithObjectsAndKeys:
-                          aClientID, kNXOAuth2AccountStoreConfigurationClientID,
-                          aSecret, kNXOAuth2AccountStoreConfigurationSecret,
-                          theScope, kNXOAuth2AccountStoreConfigurationScope,
-                          anAuthorizationURL, kNXOAuth2AccountStoreConfigurationAuthorizeURL,
-                          aTokenURL, kNXOAuth2AccountStoreConfigurationTokenURL,
-                          aTokenType, kNXOAuth2AccountStoreConfigurationTokenType,
-                          aKeyChainGroup, kNXOAuth2AccountStoreConfigurationKeyChainGroup,
-                          aRedirectURL, kNXOAuth2AccountStoreConfigurationRedirectURL, nil];
-    
-    NSLog(@"%@", conf);
-    
-    [self setConfiguration:conf
+    [self setConfiguration:[NSDictionary dictionaryWithObjectsAndKeys:
+                            aClientID, kNXOAuth2AccountStoreConfigurationClientID,
+                            aSecret, kNXOAuth2AccountStoreConfigurationSecret,
+                            theScope, kNXOAuth2AccountStoreConfigurationScope,
+                            anAuthorizationURL, kNXOAuth2AccountStoreConfigurationAuthorizeURL,
+                            aTokenURL, kNXOAuth2AccountStoreConfigurationTokenURL,
+                            aTokenType, kNXOAuth2AccountStoreConfigurationTokenType,
+                            aKeyChainGroup, kNXOAuth2AccountStoreConfigurationKeyChainGroup,
+                            aRedirectURL, kNXOAuth2AccountStoreConfigurationRedirectURL, nil]
             forAccountType:anAccountType];
 }
 

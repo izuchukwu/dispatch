@@ -12,6 +12,8 @@
 #import "NXOAuth2.h"
 
 #import "FKAuthViewController.h"
+#import "FKItems.h"
+#import "ICNetworking.h"
 
 @class FKCloud;
 
@@ -22,20 +24,22 @@
 - (void)presentAuthenticationViewController:(FKAuthViewController *)authViewController;
 - (void)feedlyAuthenticationDidCompleteWithSuccess:(BOOL)success;
 
+- (void)didFetchCategories:(NSArray *)categories;
+- (void)didFetchArticles:(NSArray *)articles forStreamable:(id<FKStreamable>)streamable;
+
 @end
 
-@interface FKCloud : NSObject<FKAuthViewControllerDelegate>
+@interface FKCloud : NSObject<FKAuthViewControllerDelegate, ICNetworkingDelegate>
 
 @property (nonatomic) id<FKCloudDelegate> delegate;
 
-- (id)initWithClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret;
+@property (nonatomic) NXOAuth2Account *account;
+
+- (id)initWithClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret account:(NXOAuth2Account *)account;
 
 - (void)requestReauthentication;
 
-- (NSArray *)fetchCategoriesWithRefresh:(BOOL)shouldRefresh;
-- (NSArray *)fetchSubscriptionsWithRefresh:(BOOL)shouldRefresh;
-- (NSArray *)fetchTagsWithRefresh:(BOOL)shouldRefresh;
-
-- (NSArray *)fetchEntriesForStreamWithID:(NSString *)streamID withRefresh:(BOOL)shouldRefresh;
+- (void)fetchCategoriesWithRefresh:(BOOL)shouldRefresh;
+- (void)fetchArticlesForStreamable:(id<FKStreamable>)streamabale withPaginationID:(NSString *)pageID shouldRefresh:(BOOL)shouldRefresh;
 
 @end

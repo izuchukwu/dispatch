@@ -16,15 +16,22 @@
 
 @property (nonatomic) FKAuthViewController *authViewController;
 
+@property (nonatomic) NSMutableDictionary *networkingFetchQueue;
+
 @end
+
+enum FKCloudNetworkingFetchType {
+    FKCloudNetworkingFetchTypeArticles = 0
+}; typedef enum FKCloudNetworkingFetchType FKCloudNetworkingFetchType;
 
 @implementation FKCloud
 
-- (id)initWithClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret {
+- (id)initWithClientID:(NSString *)clientID clientSecret:(NSString *)clientSecret account:(NXOAuth2Account *)account {
     self = [super init];
     if (self) {
         _clientID = clientID;
         _clientSecret = clientSecret;
+        _account = account;
         
         NSMutableDictionary *oAuthConfiguration = [[NSMutableDictionary alloc] init];
         [oAuthConfiguration setObject:_clientID forKey:kNXOAuth2AccountStoreConfigurationClientID];
@@ -50,27 +57,157 @@
     }];
 }
 
-#pragma mark Authentication
-
-- (void)didAuthenticateWithSuccess:(BOOL)success data:(NSData *)data {
-    if (!success) {
-        [_authViewController authenticationDidCompleteWithSuccess:NO];
-    } else {
-        NSDictionary *response = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        
-        if ([response objectForKey:kFKCloudOAuthResponseKeyAccessToken]) {
-            [_authViewController authenticationDidCompleteWithSuccess:YES];
-        } else {
-            [_authViewController authenticationDidCompleteWithSuccess:NO];
+- (void)fetchCategoriesWithRefresh:(BOOL)shouldRefresh {
+    NSAssert1(@"Account", @"To fetch categories, set an authenticated account.", _account);
+    
+    [NXOAuth2Request performMethod:@"GET" onResource:[FKCloud requestURLWithEndpoint:kFKCloudEndpointCategories] usingParameters:nil withAccount:_account sendProgressHandler:nil responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
+        if (error) {
+            NSLog(@"[!] Error Fetching Categories: %@", [error description]);
         }
+        
+        NSArray *categories = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+        
+        [self fetchSubscriptionsWithCategories:[FKCategory categoriesFromJSONArray:categories]];
+    }];
+}
+
+- (void)fetchArticlesForStreamable:(id<FKStreamable>)streamable withPaginationID:(NSString *)pageID shouldRefresh:(BOOL)shouldRefresh {
+    
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    [parameters setObject:[streamable ID] forKey:kFKCloudRequestParamStreamID];
+    [parameters setObject:[NSString stringWithFormat:@"%d", kFKCloudRequestParamStreamCountDefault] forKey:kFKCloudRequestParamStreamCount];
+    if (pageID) {
+        [parameters setObject:pageID forKey:kFKCloudRequestParamStreamContinuation];
+    }
+    
+    [NXOAuth2Request performMethod:@"GET" onResource:[FKCloud requestURLWithEndpoint:kFKCloudEndpointStream] usingParameters:parameters withAccount:_account sendProgressHandler:nil responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
+        if (error) {
+            NSLog(@"[!] Error Fetching Article IDs: %@", [error description]);
+        }
+        
+        NSArray *articleIDs = [[NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil] objectForKey:kFKCloudRequestResponseKeyStreamIDs];
+        
+        [self fetchArticlesForArticleIDSet:articleIDs streamable:streamable];
+    }];
+}
+
+#pragma mark - Fetch
+
+- (void)fetchArticlesForArticleIDSet:(NSArray *)articleIDs streamable:(id<FKStreamable>)streamable {
+    
+    NXOAuth2Request *request = [[NXOAuth2Request alloc] initWithResource:[FKCloud requestURLWithEndpoint:kFKCloudEndpointArticle] method:@"POST" parameters:nil];
+    [request setAccount:_account];
+    
+    NSMutableURLRequest *signedRequest = (NSMutableURLRequest *)[request signedURLRequest];
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:articleIDs options:0 error:nil];
+    
+    [signedRequest setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+    [signedRequest setHTTPBody:jsonData];
+    
+    ICNetworkingQueuedItem *queuedRequest = [[ICNetworkingQueuedItem alloc] init];
+    [queuedRequest setDelegate:self];
+    [queuedRequest setRequest:signedRequest];
+    
+    if (!_networkingFetchQueue) {
+        _networkingFetchQueue = [[NSMutableDictionary alloc] init];
+    }
+    
+    [_networkingFetchQueue setObject:@(FKCloudNetworkingFetchTypeArticles) forKey:[[queuedRequest  request] URL]];
+    [_networkingFetchQueue setObject:streamable forKey:[NSString stringWithFormat:@"%@-streamable", [[[queuedRequest  request] URL] absoluteString]]];
+    
+    ICNetworking *networking = [[ICNetworking alloc] init];
+    [networking addQueuedItem:queuedRequest];
+}
+
+- (void)fetchSubscriptionsWithCategories:(NSArray *)categories {
+    [NXOAuth2Request performMethod:@"GET" onResource:[FKCloud requestURLWithEndpoint:kFKCloudEndpointSubscriptions] usingParameters:nil withAccount:_account sendProgressHandler:nil responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
+        if (error) {
+            NSLog(@"[!] Error Fetching Subscriptions: %@", [error description]);
+        }
+        
+        NSArray *subs = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+        [self sortSubscriptions:[FKFeed feedsFromSubscriptionsJSONArray:subs] intoCategories:categories];
+    }];
+}
+
+- (void)sortSubscriptions:(NSArray *)subs intoCategories:(NSArray *)categories {
+    NSMutableDictionary *categorySubs = [[NSMutableDictionary alloc] init];
+    
+    for (FKFeed *sub in subs) {
+        for (NSString *categoryID in [sub categoryIDs]) {
+            if ([categorySubs objectForKey:categoryID]) {
+                NSMutableArray *array = [categorySubs objectForKey:categoryID];
+                [array addObject:sub];
+            } else {
+                NSMutableArray *array = [[NSMutableArray alloc] init];
+                [array addObject:sub];
+                [categorySubs setObject:array forKey:categoryID];
+            }
+        }
+    }
+    
+    for (NSString *categoryID in [categorySubs allKeys]) {
+        FKCategory *category;
+        
+        for (FKCategory *cat in categories) {
+            if ([[cat ID] isEqualToString:categoryID]) {
+                category = cat;
+            }
+        }
+        
+        if (category) {
+            [category setFeeds:[categorySubs objectForKey:categoryID]];
+        }
+    }
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(didFetchCategories:)]) {
+        [_delegate didFetchCategories:categories];
     }
 }
 
-#pragma mark Auth VC Delegate
+#pragma mark - Networking Delegate
+
+- (void)didFinishDownloadingItemAtURL:(NSURL *)url withSuccess:(BOOL)success data:(NSData *)data {
+    FKCloudNetworkingFetchType fetchType = (FKCloudNetworkingFetchType)[_networkingFetchQueue objectForKey:url];
+    
+    switch (fetchType) {
+        case FKCloudNetworkingFetchTypeArticles:
+        default:
+            [_delegate didFetchArticles:[FKArticle articlesFromJSONArray:[NSJSONSerialization JSONObjectWithData:data options:0 error:nil]] forStreamable:[_networkingFetchQueue objectForKey:[NSString stringWithFormat:@"%@-streamable", [url absoluteString]]]];
+            break;
+    }
+}
+
+#pragma mark - Authentication
+
+- (void)didAuthenticateWithSuccess:(BOOL)success {
+    if (_authViewController) {
+        [_authViewController authenticationDidCompleteWithSuccess:success];
+    }
+}
+
+#pragma mark - Auth VC Delegate
 
 - (void)authViewController:(UIViewController *)authViewController didReturnWithRedirectURL:(NSURL *)URL {
     [[NXOAuth2AccountStore sharedStore] handleRedirectURL:URL];
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreAccountsDidChangeNotification object:[NXOAuth2AccountStore sharedStore] queue:nil usingBlock:^(NSNotification *notification){
+        if ([[notification userInfo] objectForKey:NXOAuth2AccountStoreNewAccountUserInfoKey]) {
+            // A successful authentication has occurred
+            [[NSNotificationCenter defaultCenter] removeObserver:self];
+            _account = [[notification userInfo] objectForKey:NXOAuth2AccountStoreNewAccountUserInfoKey];
+            [self didAuthenticateWithSuccess:YES];
+        }
+    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreDidFailToRequestAccessNotification object:[NXOAuth2AccountStore sharedStore] queue:nil usingBlock:^(NSNotification *notification){
+        // An attempt to authenticate has failed
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        NSError *error = [notification.userInfo objectForKey:NXOAuth2AccountStoreErrorKey];
+        NSLog(@"[!] Error Updating Accounts: %@", [error description]);
+        [self didAuthenticateWithSuccess:NO];
+    }];
 }
 
 #pragma mark - Utils
