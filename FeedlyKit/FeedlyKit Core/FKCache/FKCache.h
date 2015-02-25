@@ -1,4 +1,4 @@
-//
+////
 //  FKCache.h
 //  FeedlyKit
 //
@@ -8,11 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+#import "FKItems.h"
+
 @interface FKCache : NSObject
 
 - (void)cacheCategories:(NSArray *)categories;
-- (void)cacheArticles:(NSArray *) forStreamable:(id<FKStreamable>)streamable;
+- (void)cacheArticles:(NSArray *)articles forStreamable:(id<FKStreamable>)streamable;
+- (void)cacheProfile:(FKProfile *)profile;
 
-
+- (NSArray *)retrieveCachedCategories;
+- (NSArray *)retrieveCachedArticlesForStreamable:(id<FKStreamable>)streamable;
+- (FKProfile *)retrieveCachedProfile;
 
 @end
