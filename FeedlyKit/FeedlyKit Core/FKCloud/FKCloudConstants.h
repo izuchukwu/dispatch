@@ -58,4 +58,15 @@
 #define kFKCloudRequestResponseKeyStreamIDs @"ids"
 #define kFKCloudRequestResponseKeyStreamContentItems @"items"
 
+//
+//  Internal
+//
+
+// Categorization
+
+#define kFKCloudMetaCategoryIDs @[kFKCloudMetaCategoryUncategorizedID]
+
+#define kFKCloudMetaCategoryUncategorizedID @"global.uncategorized"
+#define kFKCloudMetaCategoryUncategorizedLabel @"More"
+
 #endif

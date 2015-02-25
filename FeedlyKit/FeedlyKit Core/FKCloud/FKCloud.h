@@ -42,6 +42,7 @@
 - (void)requestReauthentication;
 
 - (void)fetchCategoriesWithRefresh:(BOOL)shouldRefresh;
+- (BOOL)canFetchArticlesForStreamable:(id<FKStreamable>)streamable;
 - (void)fetchArticlesForStreamable:(id<FKStreamable>)streamabale withPaginationID:(NSString *)pageID shouldRefresh:(BOOL)shouldRefresh;
 
 - (void)unauthenticate;

@@ -16,7 +16,7 @@
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSURL *site;
 
-@property (nonatomic) NSArray *categoryIDs;
+@property (nonatomic) NSDictionary *categoriesJSON;
 @property (nonatomic) FKStream *articles;
 
 + (FKFeed *)feedFromJSONDictionary:(NSDictionary *)dictionary;

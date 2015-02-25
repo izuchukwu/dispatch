@@ -28,6 +28,14 @@
         [sub setSite:[NSURL URLWithString:[subDictionary objectForKey:kFKFeedKeySiteAlt]]];
     }
     
+    NSMutableDictionary *categoriesJSON = [[NSMutableDictionary alloc] init];
+    
+    for (NSDictionary *category in [subDictionary objectForKey:kFKFeedKeyCategories]) {
+        [categoriesJSON setObject:category forKey:[category objectForKey:kFKCategoryKeyID]];
+    }
+    
+    [sub setCategoriesJSON:categoriesJSON];
+    
     [sub setJSONdata:subDictionary];
     return sub;
 }
@@ -39,14 +47,6 @@
         
         FKFeed *sub = [self feedFromJSONDictionary:subDictionary];
         [subs addObject:sub];
-        
-        NSMutableArray *categoryIDs = [[NSMutableArray alloc] init];
-        
-        for (NSDictionary *category in [subDictionary objectForKey:kFKFeedKeyCategories]) {
-            [categoryIDs addObject:[category objectForKey:kFKCategoryKeyID]];
-        }
-        
-        [sub setCategoryIDs:categoryIDs];
     }
     
     return subs;

@@ -8,6 +8,10 @@
 
 #import "FKArticle.h"
 
+@implementation FKArticleMedia
+
+@end
+
 @implementation FKArticle
 
 @synthesize ID, JSONdata;

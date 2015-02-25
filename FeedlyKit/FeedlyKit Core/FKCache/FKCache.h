@@ -10,4 +10,9 @@
 
 @interface FKCache : NSObject
 
+- (void)cacheCategories:(NSArray *)categories;
+- (void)cacheArticles:(NSArray *) forStreamable:(id<FKStreamable>)streamable;
+
+
+
 @end

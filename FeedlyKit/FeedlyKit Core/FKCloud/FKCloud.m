@@ -71,7 +71,25 @@ enum FKCloudNetworkingFetchType {
     }];
 }
 
+- (BOOL)canFetchArticlesForStreamable:(id<FKStreamable>)streamable {
+    // ensure it's not a Meta ID
+    
+    for (NSString *metaID in kFKCloudMetaCategoryIDs) {
+        if ([metaID isEqualToString:[streamable ID]]) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
 - (void)fetchArticlesForStreamable:(id<FKStreamable>)streamable withPaginationID:(NSString *)pageID shouldRefresh:(BOOL)shouldRefresh {
+    // ensure it's not a Meta ID
+    
+    if (![self canFetchArticlesForStreamable:streamable]) {
+        [_delegate didFetchArticles:nil forStreamable:streamable withPaginationID:nil];
+        return;
+    }
     
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     [parameters setObject:[streamable ID] forKey:kFKCloudRequestParamStreamID];
@@ -165,20 +183,34 @@ enum FKCloudNetworkingFetchType {
 }
 
 - (void)sortSubscriptions:(NSArray *)subs intoCategories:(NSArray *)categories {
+    categories = [NSMutableArray arrayWithArray:categories];
     NSMutableDictionary *categorySubs = [[NSMutableDictionary alloc] init];
     
     for (FKFeed *sub in subs) {
-        for (NSString *categoryID in [sub categoryIDs]) {
-            if ([categorySubs objectForKey:categoryID]) {
-                NSMutableArray *array = [categorySubs objectForKey:categoryID];
+        if ([sub categoriesJSON] && [[[sub categoriesJSON] allKeys] count]) {
+            for (NSString *categoryID in [[sub categoriesJSON] allKeys]) {
+                if ([categorySubs objectForKey:categoryID]) {
+                    NSMutableArray *array = [categorySubs objectForKey:categoryID];
+                    [array addObject:sub];
+                } else {
+                    NSMutableArray *array = [[NSMutableArray alloc] init];
+                    [array addObject:sub];
+                    [categorySubs setObject:array forKey:categoryID];
+                }
+            }
+        } else {
+            if ([categorySubs objectForKey:kFKCloudMetaCategoryUncategorizedID]) {
+                NSMutableArray *array = [categorySubs objectForKey:kFKCloudMetaCategoryUncategorizedID];
                 [array addObject:sub];
             } else {
                 NSMutableArray *array = [[NSMutableArray alloc] init];
                 [array addObject:sub];
-                [categorySubs setObject:array forKey:categoryID];
+                [categorySubs setObject:array forKey:kFKCloudMetaCategoryUncategorizedID];
             }
         }
     }
+    
+    NSLog(@"catIDs: %@", [categorySubs allKeys]);
     
     for (NSString *categoryID in [categorySubs allKeys]) {
         FKCategory *category;
@@ -191,6 +223,17 @@ enum FKCloudNetworkingFetchType {
         
         if (category) {
             [category setFeeds:[categorySubs objectForKey:categoryID]];
+        } else if ([categoryID isEqualToString:kFKCloudMetaCategoryUncategorizedID]) {
+            // uncategorized
+            
+            NSMutableDictionary *builtData = [[NSMutableDictionary alloc] init];
+            [builtData setObject:kFKCloudMetaCategoryUncategorizedID forKey:kFKCategoryKeyID];
+            [builtData setObject:kFKCloudMetaCategoryUncategorizedLabel forKey:kFKCategoryKeyLabel];
+            
+            category = [FKCategory categoryFromJSONDictionary:builtData];
+            [category setFeeds:[categorySubs objectForKey:categoryID]];
+            
+            [(NSMutableArray *)categories addObject:category];
         }
     }
     
