@@ -8,6 +8,7 @@
 
 #import "FKCloud.h"
 #import "FKCloudConstants.h"
+#import "FKCache.h"
 
 @interface FKCloud()
 
@@ -60,6 +61,14 @@ enum FKCloudNetworkingFetchType {
 - (void)fetchCategoriesWithRefresh:(BOOL)shouldRefresh {
     NSAssert1(@"Account", @"To fetch categories, set an authenticated account.", _account);
     
+    if (!shouldRefresh) {
+        NSArray *categories = [FKCache retrieveCachedCategories];
+        if (categories) {
+            [_delegate didFetchCategories:categories];
+            return;
+        }
+    }
+    
     [NXOAuth2Request performMethod:@"GET" onResource:[FKCloud requestURLWithEndpoint:kFKCloudEndpointCategories] usingParameters:nil withAccount:_account sendProgressHandler:nil responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
         if (error) {
             NSLog(@"[!] Error Fetching Categories: %@", [error description]);
@@ -83,13 +92,17 @@ enum FKCloudNetworkingFetchType {
     return YES;
 }
 
-- (void)fetchArticlesForStreamable:(id<FKStreamable>)streamable withPaginationID:(NSString *)pageID shouldRefresh:(BOOL)shouldRefresh {
+- (void)fetchArticlesForStreamable:(id<FKStreamable>)streamable withPaginationID:(NSString *)pageID {
     // ensure it's not a Meta ID
     
     if (![self canFetchArticlesForStreamable:streamable]) {
         [_delegate didFetchArticles:nil forStreamable:streamable withPaginationID:nil];
         return;
     }
+    
+    // AS OF rn, articles are not cached in FeedlyKit
+    // If you wanna cache em, do em in the UI, or implement this
+    // articles are the most frequently updated FKItem so idk
     
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     [parameters setObject:[streamable ID] forKey:kFKCloudRequestParamStreamID];
@@ -113,6 +126,31 @@ enum FKCloudNetworkingFetchType {
     }];
 }
 
+- (void)fetchProfileWithRefresh:(BOOL)shouldRefresh {
+    if (!_account) {
+        return;
+    }
+    
+    if (!shouldRefresh) {
+        FKProfile *profile = [FKCache retrieveCachedProfile];
+        if (profile) {
+            [_delegate didFetchProfile:profile];
+            return;
+        }
+    }
+    
+    [NXOAuth2Request performMethod:@"GET" onResource:[FKCloud requestURLWithEndpoint:kFKCloudEndpointProfile] usingParameters:nil withAccount:_account sendProgressHandler:nil responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
+        if (error) {
+            NSLog(@"[!] Error Fetching Profile: %@", [error description]);
+        }
+        
+        NSDictionary *profileJSON = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+        FKProfile *profile = [FKProfile profileFromJSONDictionary:profileJSON];
+        [_delegate didFetchProfile:profile];
+    }];
+    
+}
+
 - (void)unauthenticate {
     if (_account) {
         [[NXOAuth2AccountStore sharedStore] removeAccount:_account];
@@ -123,22 +161,6 @@ enum FKCloudNetworkingFetchType {
 }
 
 #pragma mark - Fetch
-
-- (void)fetchProfile {
-    if (!_account) {
-        return;
-    }
-    
-    [NXOAuth2Request performMethod:@"GET" onResource:[FKCloud requestURLWithEndpoint:kFKCloudEndpointProfile] usingParameters:nil withAccount:_account sendProgressHandler:nil responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
-        if (error) {
-            NSLog(@"[!] Error Fetching Profile: %@", [error description]);
-        }
-        
-        NSDictionary *profileJSON = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
-        FKProfile *profile = [FKProfile profileFromJSONDictionary:profileJSON];
-    }];
-
-}
 
 - (void)fetchArticlesForArticleIDSet:(NSArray *)articleIDs streamable:(id<FKStreamable>)streamable __deprecated {
     
@@ -237,6 +259,7 @@ enum FKCloudNetworkingFetchType {
         }
     }
     
+    [FKCache cacheCategories:categories];
     if (_delegate && [_delegate respondsToSelector:@selector(didFetchCategories:)]) {
         [_delegate didFetchCategories:categories];
     }

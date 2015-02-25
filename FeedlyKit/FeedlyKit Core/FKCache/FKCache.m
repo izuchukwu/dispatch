@@ -14,7 +14,7 @@
 
 #pragma mark - Caching
 
-- (void)cacheCategories:(NSArray *)categories {
++ (void)cacheCategories:(NSArray *)categories {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableDictionary *categoriesData = [[NSMutableDictionary alloc] init];
     NSMutableArray *categoryIDs = [[NSMutableArray alloc] init];
@@ -36,7 +36,7 @@
     [defaults setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:kFKCacheDefaultsKeyCategoriesTimestamp];
 }
 
-- (void)cacheArticles:(NSArray *)articles forStreamable:(id<FKStreamable>)streamable {
++ (void)cacheArticles:(NSArray *)articles forStreamable:(id<FKStreamable>)streamable {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *cachedArticleContexts = [NSMutableArray arrayWithArray:[defaults objectForKey:kFKCacheDefaultsKeyArticles]];
     
@@ -71,7 +71,7 @@
     [defaults setObject:cachedArticleContexts forKey:kFKCacheDefaultsKeyArticles];
 }
 
-- (void)cacheProfile:(FKProfile *)profile {
++ (void)cacheProfile:(FKProfile *)profile {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[profile JSONdata] forKey:kFKCacheDefaultsKeyProfile];
     [defaults setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:kFKCacheDefaultsKeyProfileTimestamp];
@@ -79,7 +79,7 @@
 
 #pragma mark - Retrieval
 
-- (NSArray *)retrieveCachedCategories {
++ (NSArray *)retrieveCachedCategories {
     NSDictionary *categoriesData = [[NSUserDefaults standardUserDefaults] objectForKey:kFKCacheDefaultsKeyCategories];
     
     if (!categoriesData) {
@@ -106,7 +106,7 @@
     return categories;
 }
 
-- (NSArray *)retrieveCachedArticlesForStreamable:(id<FKStreamable>)streamable {
++ (NSArray *)retrieveCachedArticlesForStreamable:(id<FKStreamable>)streamable {
     NSArray *cachedArticleContexts = [[NSUserDefaults standardUserDefaults] objectForKey:kFKCacheDefaultsKeyArticles];
     
     if (!cachedArticleContexts) {
@@ -128,7 +128,7 @@
     return [FKArticle articlesFromJSONArray:articlesData];
 }
 
-- (FKProfile *)retrieveCachedProfile {
++ (FKProfile *)retrieveCachedProfile {
     NSDictionary *profileDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:kFKCacheDefaultsKeyProfile];
     
     if (profileDictionary) {

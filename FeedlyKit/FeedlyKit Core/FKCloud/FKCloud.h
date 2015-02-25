@@ -28,6 +28,7 @@
 
 - (void)didFetchCategories:(NSArray *)categories;
 - (void)didFetchArticles:(NSArray *)articles forStreamable:(id<FKStreamable>)streamable withPaginationID:(NSString *)pageID;
+- (void)didFetchProfile:(FKProfile *)profile;
 
 @end
 
@@ -43,7 +44,8 @@
 
 - (void)fetchCategoriesWithRefresh:(BOOL)shouldRefresh;
 - (BOOL)canFetchArticlesForStreamable:(id<FKStreamable>)streamable;
-- (void)fetchArticlesForStreamable:(id<FKStreamable>)streamabale withPaginationID:(NSString *)pageID shouldRefresh:(BOOL)shouldRefresh;
+- (void)fetchArticlesForStreamable:(id<FKStreamable>)streamabale withPaginationID:(NSString *)pageID;
+- (void)fetchProfileWithRefresh:(BOOL)shouldRefresh;
 
 - (void)unauthenticate;
 

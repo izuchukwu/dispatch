@@ -12,12 +12,12 @@
 
 @interface FKCache : NSObject
 
-- (void)cacheCategories:(NSArray *)categories;
-- (void)cacheArticles:(NSArray *)articles forStreamable:(id<FKStreamable>)streamable;
-- (void)cacheProfile:(FKProfile *)profile;
++ (void)cacheCategories:(NSArray *)categories;
++ (void)cacheArticles:(NSArray *)articles forStreamable:(id<FKStreamable>)streamable;
++ (void)cacheProfile:(FKProfile *)profile;
 
-- (NSArray *)retrieveCachedCategories;
-- (NSArray *)retrieveCachedArticlesForStreamable:(id<FKStreamable>)streamable;
-- (FKProfile *)retrieveCachedProfile;
++ (NSArray *)retrieveCachedCategories;
++ (NSArray *)retrieveCachedArticlesForStreamable:(id<FKStreamable>)streamable;
++ (FKProfile *)retrieveCachedProfile;
 
 @end
