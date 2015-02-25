@@ -10,16 +10,34 @@
 
 @implementation FKFeed
 
-@synthesize ID;
+@synthesize ID, JSONdata;
+
++ (FKFeed *)feedFromJSONDictionary:(NSDictionary *)subDictionary {
+    FKFeed *sub = [[FKFeed alloc] init];
+    if ([subDictionary objectForKey:kFKFeedKeyID]) {
+        [sub setID:[subDictionary objectForKey:kFKFeedKeyID]];
+    } else {
+        [sub setID:[subDictionary objectForKey:kFKFeedKeyIDAlt]];
+    }
+    
+    [sub setTitle:[subDictionary objectForKey:kFKFeedKeyTitle]];
+    
+    if ([subDictionary objectForKey:kFKFeedKeySite]) {
+        [sub setSite:[NSURL URLWithString:[subDictionary objectForKey:kFKFeedKeySite]]];
+    } else {
+        [sub setSite:[NSURL URLWithString:[subDictionary objectForKey:kFKFeedKeySiteAlt]]];
+    }
+    
+    [sub setJSONdata:subDictionary];
+    return sub;
+}
 
 + (NSArray *)feedsFromSubscriptionsJSONArray:(NSArray *)array {
     NSMutableArray *subs = [[NSMutableArray alloc] init];
     
     for (NSDictionary *subDictionary in array) {
-        FKFeed *sub = [[FKFeed alloc] init];
-        [sub setID:[subDictionary objectForKey:kFKFeedKeyID]];
-        [sub setTitle:[subDictionary objectForKey:kFKFeedKeyTitle]];
-        [sub setSite:[NSURL URLWithString:[subDictionary objectForKey:kFKFeedKeySite]]];
+        
+        FKFeed *sub = [self feedFromJSONDictionary:subDictionary];
         [subs addObject:sub];
         
         NSMutableArray *categoryIDs = [[NSMutableArray alloc] init];

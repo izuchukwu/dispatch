@@ -16,6 +16,7 @@
 @property (nonatomic) NSString *label;
 @property (nonatomic) NSArray *feeds;
 
++ (FKCategory *)categoryFromJSONDictionary:(NSDictionary *)jsonDictionary;
 + (NSArray *)categoriesFromJSONArray:(NSArray *)array;
 
 @end

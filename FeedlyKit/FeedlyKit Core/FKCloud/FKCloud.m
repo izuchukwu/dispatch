@@ -106,6 +106,22 @@ enum FKCloudNetworkingFetchType {
 
 #pragma mark - Fetch
 
+- (void)fetchProfile {
+    if (!_account) {
+        return;
+    }
+    
+    [NXOAuth2Request performMethod:@"GET" onResource:[FKCloud requestURLWithEndpoint:kFKCloudEndpointProfile] usingParameters:nil withAccount:_account sendProgressHandler:nil responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
+        if (error) {
+            NSLog(@"[!] Error Fetching Profile: %@", [error description]);
+        }
+        
+        NSDictionary *profileJSON = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+        FKProfile *profile = [FKProfile profileFromJSONDictionary:profileJSON];
+    }];
+
+}
+
 - (void)fetchArticlesForArticleIDSet:(NSArray *)articleIDs streamable:(id<FKStreamable>)streamable __deprecated {
     
     // This method is used in the two-part method for fetching Articles

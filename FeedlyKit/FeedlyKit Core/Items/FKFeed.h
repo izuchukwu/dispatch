@@ -19,6 +19,7 @@
 @property (nonatomic) NSArray *categoryIDs;
 @property (nonatomic) FKStream *articles;
 
++ (FKFeed *)feedFromJSONDictionary:(NSDictionary *)dictionary;
 + (NSArray *)feedsFromSubscriptionsJSONArray:(NSArray *)array;
 
 @end

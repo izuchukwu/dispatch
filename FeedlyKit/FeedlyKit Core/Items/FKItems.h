@@ -13,6 +13,7 @@
 #import "FKCategory.h"
 #import "FKFeed.h"
 #import "FKArticle.h"
+#import "FKProfile.h"
 
 // Categories contain Feeds
 // Feeds contain Streams

@@ -40,6 +40,7 @@
 
 #define kFKCloudEndpointCategories @"v3/categories"
 #define kFKCloudEndpointSubscriptions @"v3/subscriptions"
+#define kFKCloudEndpointProfile @"v3/profile"
 #define kFKCloudEndpointStream @"v3/streams/ids"
 #define kFKCloudEndpointStreamContent @"v3/streams/contents"
 #define kFKCloudEndpointArticle @"v3/entries/.mget"

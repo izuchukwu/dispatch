@@ -1,5 +1,5 @@
 //
-//  FKStream.h
+//  FKCache.h
 //  FeedlyKit
 //
 //  Created by Izuchukwu Elechi on 2/24/15.
@@ -8,13 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol FKStreamable <NSObject>
-
-@property (nonatomic) NSString *ID;
-@property (nonatomic) NSDictionary *JSONdata;
-
-@end
-
-@interface FKStream : NSObject
+@interface FKCache : NSObject
 
 @end

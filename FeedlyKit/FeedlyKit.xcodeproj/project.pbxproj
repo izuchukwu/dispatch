@@ -37,6 +37,8 @@
 		869F90931A9C70D80096FC30 /* FKArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90921A9C70D80096FC30 /* FKArticle.m */; };
 		869F909C1A9C99D90096FC30 /* ICNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90981A9C99D90096FC30 /* ICNetworking.m */; };
 		869F909D1A9C99D90096FC30 /* ICNetworkingQueuedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F909B1A9C99D90096FC30 /* ICNetworkingQueuedItem.m */; };
+		869F90A41A9D626B0096FC30 /* FKCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90A31A9D626B0096FC30 /* FKCache.m */; };
+		869F90A71A9D6C750096FC30 /* FKProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90A61A9D6C750096FC30 /* FKProfile.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +122,10 @@
 		869F909A1A9C99D90096FC30 /* ICNetworkingQueuedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNetworkingQueuedItem.h; sourceTree = "<group>"; };
 		869F909B1A9C99D90096FC30 /* ICNetworkingQueuedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICNetworkingQueuedItem.m; sourceTree = "<group>"; };
 		869F90A01A9D5C8F0096FC30 /* FKAuthCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FKAuthCommon.h; sourceTree = "<group>"; };
+		869F90A21A9D626B0096FC30 /* FKCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FKCache.h; path = "FeedlyKit Core/FKCache/FKCache.h"; sourceTree = SOURCE_ROOT; };
+		869F90A31A9D626B0096FC30 /* FKCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FKCache.m; path = "FeedlyKit Core/FKCache/FKCache.m"; sourceTree = SOURCE_ROOT; };
+		869F90A51A9D6C750096FC30 /* FKProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FKProfile.h; sourceTree = "<group>"; };
+		869F90A61A9D6C750096FC30 /* FKProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FKProfile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +305,7 @@
 				869F907B1A9C58150096FC30 /* FKCloud */,
 				869F90871A9C6C6B0096FC30 /* FKItems */,
 				869F90781A9C58150096FC30 /* FKAuthViewController */,
+				869F90A11A9D624A0096FC30 /* FKCache */,
 			);
 			path = "FeedlyKit Core";
 			sourceTree = "<group>";
@@ -345,6 +352,8 @@
 				869F908F1A9C6F790096FC30 /* FKFeed.m */,
 				869F90911A9C70D80096FC30 /* FKArticle.h */,
 				869F90921A9C70D80096FC30 /* FKArticle.m */,
+				869F90A51A9D6C750096FC30 /* FKProfile.h */,
+				869F90A61A9D6C750096FC30 /* FKProfile.m */,
 			);
 			name = FKItems;
 			path = FKCloud;
@@ -360,6 +369,16 @@
 				869F909B1A9C99D90096FC30 /* ICNetworkingQueuedItem.m */,
 			);
 			path = ICNetworking;
+			sourceTree = "<group>";
+		};
+		869F90A11A9D624A0096FC30 /* FKCache */ = {
+			isa = PBXGroup;
+			children = (
+				869F90A21A9D626B0096FC30 /* FKCache.h */,
+				869F90A31A9D626B0096FC30 /* FKCache.m */,
+			);
+			name = FKCache;
+			path = FKAuthViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -470,6 +489,7 @@
 				869F90901A9C6F790096FC30 /* FKFeed.m in Sources */,
 				869F909C1A9C99D90096FC30 /* ICNetworking.m in Sources */,
 				869F901F1A9C57880096FC30 /* ViewController.m in Sources */,
+				869F90A71A9D6C750096FC30 /* FKProfile.m in Sources */,
 				869F90931A9C70D80096FC30 /* FKArticle.m in Sources */,
 				869F906F1A9C57C20096FC30 /* NXOAuth2FileStreamWrapper.m in Sources */,
 				869F90711A9C57C20096FC30 /* NXOAuth2PostBodyStream.m in Sources */,
@@ -481,6 +501,7 @@
 				869F90701A9C57C20096FC30 /* NXOAuth2PostBodyPart.m in Sources */,
 				869F901C1A9C57880096FC30 /* AppDelegate.m in Sources */,
 				869F90681A9C57C20096FC30 /* NSURL+NXOAuth2.m in Sources */,
+				869F90A41A9D626B0096FC30 /* FKCache.m in Sources */,
 				869F908A1A9C6CDD0096FC30 /* FKCategory.m in Sources */,
 				869F90191A9C57880096FC30 /* main.m in Sources */,
 				869F90691A9C57C20096FC30 /* NXOAuth2AccessToken.m in Sources */,

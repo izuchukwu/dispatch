@@ -10,16 +10,21 @@
 
 @implementation FKCategory
 
-@synthesize ID;
+@synthesize ID, JSONdata;
+
++ (FKCategory *)categoryFromJSONDictionary:(NSDictionary *)categoryDictionary {
+    FKCategory *category = [[FKCategory alloc] init];
+    [category setID:[categoryDictionary objectForKey:kFKCategoryKeyID]];
+    [category setLabel:[categoryDictionary objectForKey:kFKCategoryKeyLabel]];
+    [category setJSONdata:categoryDictionary];
+    return category;
+}
 
 + (NSArray *)categoriesFromJSONArray:(NSArray *)array {
     NSMutableArray *categories = [[NSMutableArray alloc] init];
     
     for (NSDictionary *categoryDictionary in array) {
-        FKCategory *category = [[FKCategory alloc] init];
-        [category setID:[categoryDictionary objectForKey:kFKCategoryKeyID]];
-        [category setLabel:[categoryDictionary objectForKey:kFKCategoryKeyLabel]];
-        [categories addObject:category];
+        [categories addObject:[self categoryFromJSONDictionary:categoryDictionary]];
     }
     
     return categories;

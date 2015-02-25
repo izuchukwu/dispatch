@@ -11,6 +11,13 @@
 #import "FKStream.h"
 #import "FKFeed.h"
 
+@interface FKArticleMedia : NSObject
+
+@property (nonatomic) NSURL *URL;
+@property (nonatomic) NSString *contentType;
+
+@end
+
 @interface FKArticle : NSObject<FKStreamable>
 
 @property (nonatomic) NSString *title;
@@ -26,7 +33,9 @@
 
 @property (nonatomic) FKFeed *feed;
 @property (nonatomic) NSArray *keywords;
+@property (nonatomic) NSArray *enclosedMedia;
 
++ (FKArticle *)articleFromJSONDictionary:(NSDictionary *)dictionary;
 + (NSArray *)articlesFromJSONArray:(NSArray *)array;
 
 @end
