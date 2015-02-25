@@ -20,19 +20,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreAccountsDidChangeNotification object:[NXOAuth2AccountStore sharedStore] queue:nil usingBlock:^(NSNotification *notification){
+    [[NSNotificationCenter defaultCenter] addObserverForName:FKAccountsDidChangeNotification object:FKSharedAccountsStore queue:nil usingBlock:^(NSNotification *notification){
         NSLog(@"Accounts Updated");
         NSLog(@"%@", [notification userInfo]);
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreDidFailToRequestAccessNotification object:[NXOAuth2AccountStore sharedStore] queue:nil usingBlock:^(NSNotification *notification){
-        NSError *error = [notification.userInfo objectForKey:NXOAuth2AccountStoreErrorKey];
+    [[NSNotificationCenter defaultCenter] addObserverForName:FKDidFailToRequestAccessNotification object:FKSharedAccountsStore queue:nil usingBlock:^(NSNotification *notification){
+        NSError *error = [notification.userInfo objectForKey:FKRequestAccessErrorKey];
         NSLog(@"[!] Error Updating Accounts: %@", [error description]);
     }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    if (![[[NXOAuth2AccountStore sharedStore] accounts] count]) {
+    if (![[FKSharedAccountsStore accounts] count]) {
         NSLog(@"[!] No Accounts Found, Requesting Reauthentication");
         _feedlyCloud = [[FKCloud alloc] initWithClientID:@"sandbox" clientSecret:Obfuscate._8.L.D.Q.O.W._8.K.P.Y.F.P.C.Q.V._2.U.L._6.J account:nil];
         [_feedlyCloud setDelegate:self];
@@ -40,7 +40,7 @@
     } else {
         NSLog(@"Retrieving Stored Accounts");
         NSLog(@"%@", [[NXOAuth2AccountStore sharedStore] accounts]);
-        _feedlyCloud = [[FKCloud alloc] initWithClientID:@"sandbox" clientSecret:Obfuscate._8.L.D.Q.O.W._8.K.P.Y.F.P.C.Q.V._2.U.L._6.J account:[[[NXOAuth2AccountStore sharedStore] accounts] firstObject]];
+        _feedlyCloud = [[FKCloud alloc] initWithClientID:@"sandbox" clientSecret:Obfuscate._8.L.D.Q.O.W._8.K.P.Y.F.P.C.Q.V._2.U.L._6.J account:[[FKSharedAccountsStore accounts] firstObject]];
         [_feedlyCloud setDelegate:self];
     }
     
@@ -59,8 +59,9 @@
 
 #pragma mark - FKCloud Delegate
 
-- (void)didFetchArticles:(NSArray *)articles forStreamable:(id<FKStreamable>)streamable {
+- (void)didFetchArticles:(NSArray *)articles forStreamable:(id<FKStreamable>)streamable withPaginationID:(NSString *)pageID {
     NSLog(@"articles: %@", articles);
+    NSLog(@"pagination ID: %@", pageID);
 }
 
 - (void)didFetchCategories:(NSArray *)categories {

@@ -80,20 +80,37 @@ enum FKCloudNetworkingFetchType {
         [parameters setObject:pageID forKey:kFKCloudRequestParamStreamContinuation];
     }
     
-    [NXOAuth2Request performMethod:@"GET" onResource:[FKCloud requestURLWithEndpoint:kFKCloudEndpointStream] usingParameters:parameters withAccount:_account sendProgressHandler:nil responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
+    [NXOAuth2Request performMethod:@"GET" onResource:[FKCloud requestURLWithEndpoint:kFKCloudEndpointStreamContent] usingParameters:parameters withAccount:_account sendProgressHandler:nil responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
         if (error) {
-            NSLog(@"[!] Error Fetching Article IDs: %@", [error description]);
+            NSLog(@"[!] Error Fetching Articles: %@", [error description]);
         }
         
-        NSArray *articleIDs = [[NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil] objectForKey:kFKCloudRequestResponseKeyStreamIDs];
+        NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+        NSArray *articlesJSON = [responseJSON objectForKey:kFKCloudRequestResponseKeyStreamContentItems];
+        NSArray *articles = [FKArticle articlesFromJSONArray:articlesJSON];
         
-        [self fetchArticlesForArticleIDSet:articleIDs streamable:streamable];
+        if ([_delegate respondsToSelector:@selector(didFetchArticles:forStreamable:withPaginationID:)]) {
+            [_delegate didFetchArticles:articles forStreamable:streamable withPaginationID:[responseJSON objectForKey:kFKCloudRequestParamStreamContinuation]];
+        }
     }];
+}
+
+- (void)unauthenticate {
+    if (_account) {
+        [[NXOAuth2AccountStore sharedStore] removeAccount:_account];
+        _account = nil;
+    } else {
+        NSLog(@"[!] Attempted unauthentication without account set");
+    }
 }
 
 #pragma mark - Fetch
 
-- (void)fetchArticlesForArticleIDSet:(NSArray *)articleIDs streamable:(id<FKStreamable>)streamable {
+- (void)fetchArticlesForArticleIDSet:(NSArray *)articleIDs streamable:(id<FKStreamable>)streamable __deprecated {
+    
+    // This method is used in the two-part method for fetching Articles
+    // Instead, request the stream contents directly
+    // The method is kept to illustrate using both NXOAuth2 & ICNetworking for POSTs
     
     NXOAuth2Request *request = [[NXOAuth2Request alloc] initWithResource:[FKCloud requestURLWithEndpoint:kFKCloudEndpointArticle] method:@"POST" parameters:nil];
     [request setAccount:_account];
@@ -170,20 +187,11 @@ enum FKCloudNetworkingFetchType {
 
 - (void)didFinishDownloadingItemAtURL:(NSURL *)url withSuccess:(BOOL)success data:(NSData *)data {
     FKCloudNetworkingFetchType fetchType = (FKCloudNetworkingFetchType)[_networkingFetchQueue objectForKey:url];
+    [_networkingFetchQueue removeObjectForKey:url];
     
     switch (fetchType) {
-        case FKCloudNetworkingFetchTypeArticles:
         default:
-            [_delegate didFetchArticles:[FKArticle articlesFromJSONArray:[NSJSONSerialization JSONObjectWithData:data options:0 error:nil]] forStreamable:[_networkingFetchQueue objectForKey:[NSString stringWithFormat:@"%@-streamable", [url absoluteString]]]];
             break;
-    }
-}
-
-#pragma mark - Authentication
-
-- (void)didAuthenticateWithSuccess:(BOOL)success {
-    if (_authViewController) {
-        [_authViewController authenticationDidCompleteWithSuccess:success];
     }
 }
 
@@ -191,13 +199,21 @@ enum FKCloudNetworkingFetchType {
 
 - (void)authViewController:(UIViewController *)authViewController didReturnWithRedirectURL:(NSURL *)URL {
     [[NXOAuth2AccountStore sharedStore] handleRedirectURL:URL];
+    [_authViewController authenticationStepDidComplete];
+    
+    if ([_delegate respondsToSelector:@selector(feedlyIsAuthenticating)]) {
+        [_delegate feedlyIsAuthenticating];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreAccountsDidChangeNotification object:[NXOAuth2AccountStore sharedStore] queue:nil usingBlock:^(NSNotification *notification){
         if ([[notification userInfo] objectForKey:NXOAuth2AccountStoreNewAccountUserInfoKey]) {
             // A successful authentication has occurred
             [[NSNotificationCenter defaultCenter] removeObserver:self];
             _account = [[notification userInfo] objectForKey:NXOAuth2AccountStoreNewAccountUserInfoKey];
-            [self didAuthenticateWithSuccess:YES];
+            
+            if ([_delegate respondsToSelector:@selector(feedlyAuthenticationDidCompleteWithSuccess:)]) {
+                [_delegate feedlyAuthenticationDidCompleteWithSuccess:YES];
+            }
         }
     }];
     
@@ -206,7 +222,10 @@ enum FKCloudNetworkingFetchType {
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         NSError *error = [notification.userInfo objectForKey:NXOAuth2AccountStoreErrorKey];
         NSLog(@"[!] Error Updating Accounts: %@", [error description]);
-        [self didAuthenticateWithSuccess:NO];
+        
+        if ([_delegate respondsToSelector:@selector(feedlyAuthenticationDidCompleteWithSuccess:)]) {
+            [_delegate feedlyAuthenticationDidCompleteWithSuccess:NO];
+        }
     }];
 }
 

@@ -22,10 +22,12 @@
 @optional
 
 - (void)presentAuthenticationViewController:(FKAuthViewController *)authViewController;
+
+- (void)feedlyIsAuthenticating;
 - (void)feedlyAuthenticationDidCompleteWithSuccess:(BOOL)success;
 
 - (void)didFetchCategories:(NSArray *)categories;
-- (void)didFetchArticles:(NSArray *)articles forStreamable:(id<FKStreamable>)streamable;
+- (void)didFetchArticles:(NSArray *)articles forStreamable:(id<FKStreamable>)streamable withPaginationID:(NSString *)pageID;
 
 @end
 
@@ -41,5 +43,7 @@
 
 - (void)fetchCategoriesWithRefresh:(BOOL)shouldRefresh;
 - (void)fetchArticlesForStreamable:(id<FKStreamable>)streamabale withPaginationID:(NSString *)pageID shouldRefresh:(BOOL)shouldRefresh;
+
+- (void)unauthenticate;
 
 @end

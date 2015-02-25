@@ -119,6 +119,7 @@
 		869F90991A9C99D90096FC30 /* ICNetworkingCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNetworkingCommon.h; sourceTree = "<group>"; };
 		869F909A1A9C99D90096FC30 /* ICNetworkingQueuedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICNetworkingQueuedItem.h; sourceTree = "<group>"; };
 		869F909B1A9C99D90096FC30 /* ICNetworkingQueuedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICNetworkingQueuedItem.m; sourceTree = "<group>"; };
+		869F90A01A9D5C8F0096FC30 /* FKAuthCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FKAuthCommon.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,7 +297,7 @@
 			children = (
 				869F90771A9C58150096FC30 /* FeedlyKit.h */,
 				869F907B1A9C58150096FC30 /* FKCloud */,
-				869F90871A9C6C6B0096FC30 /* Items */,
+				869F90871A9C6C6B0096FC30 /* FKItems */,
 				869F90781A9C58150096FC30 /* FKAuthViewController */,
 			);
 			path = "FeedlyKit Core";
@@ -305,6 +306,7 @@
 		869F90781A9C58150096FC30 /* FKAuthViewController */ = {
 			isa = PBXGroup;
 			children = (
+				869F90A01A9D5C8F0096FC30 /* FKAuthCommon.h */,
 				869F90791A9C58150096FC30 /* FKAuthViewController.h */,
 				869F907A1A9C58150096FC30 /* FKAuthViewController.m */,
 			);
@@ -330,7 +332,7 @@
 			path = UAObfuscatedString;
 			sourceTree = "<group>";
 		};
-		869F90871A9C6C6B0096FC30 /* Items */ = {
+		869F90871A9C6C6B0096FC30 /* FKItems */ = {
 			isa = PBXGroup;
 			children = (
 				869F90941A9C73360096FC30 /* FKItems.h */,
@@ -344,7 +346,7 @@
 				869F90911A9C70D80096FC30 /* FKArticle.h */,
 				869F90921A9C70D80096FC30 /* FKArticle.m */,
 			);
-			name = Items;
+			name = FKItems;
 			path = FKCloud;
 			sourceTree = "<group>";
 		};

@@ -41,6 +41,7 @@
 #define kFKCloudEndpointCategories @"v3/categories"
 #define kFKCloudEndpointSubscriptions @"v3/subscriptions"
 #define kFKCloudEndpointStream @"v3/streams/ids"
+#define kFKCloudEndpointStreamContent @"v3/streams/contents"
 #define kFKCloudEndpointArticle @"v3/entries/.mget"
 
 // Parameters
@@ -54,5 +55,6 @@
 // Response Keys
 
 #define kFKCloudRequestResponseKeyStreamIDs @"ids"
+#define kFKCloudRequestResponseKeyStreamContentItems @"items"
 
 #endif

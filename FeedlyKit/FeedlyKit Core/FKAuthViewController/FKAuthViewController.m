@@ -37,6 +37,13 @@
     
     NSLog(@"Requesting Authentication with URL: %@", [_request URL]);
     
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [storage cookies]) {
+        [storage deleteCookie:cookie];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     _webView = [[UIWebView alloc] initWithFrame:self.view.frame];
     [_webView setDelegate:self];
     [self.view addSubview:_webView];
@@ -71,16 +78,8 @@
 
 #pragma mark - Public
 
-- (void)authenticationDidCompleteWithSuccess:(BOOL)success {
-    [_activityIndicatorView setAlpha:0.0];
-    
-    // DEBUG
-    UILabel *label = [[UILabel alloc] initWithFrame:self.view.frame];
-    [label setText:(success ? @"yay" : @":(")];
-    [self.view addSubview:label];
-    // END DEBUG
-    
-    [NSTimer timerWithTimeInterval:2 target:self selector:@selector(dismiss) userInfo:nil repeats:NO];
+- (void)authenticationStepDidComplete {
+    [self dismiss];
 }
 
 #pragma mark - Web View Delegate

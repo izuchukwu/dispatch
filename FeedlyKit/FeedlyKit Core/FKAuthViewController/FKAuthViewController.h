@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FKAuthCommon.h"
+
 @protocol FKAuthViewControllerDelegate <NSObject>
 
 - (void)authViewController:(UIViewController *)authViewController didReturnWithRedirectURL:(NSURL *)URL;
@@ -20,6 +22,6 @@
 
 - (id)initWithAuthRequest:(NSURLRequest *)request redirectPrefix:(NSString *)redirectPrefix;
 
-- (void)authenticationDidCompleteWithSuccess:(BOOL)success;
+- (void)authenticationStepDidComplete;
 
 @end

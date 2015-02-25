@@ -14,11 +14,13 @@
 
 @protocol ICNetworkingDelegate <NSObject>
 
-- (void)didUpdateProgressForItemAtURL:(NSURL *)url withProgress:(double)progress;
-//  Delegate method called when progress has been made on an existing queued download
-
 - (void)didFinishDownloadingItemAtURL:(NSURL *)url withSuccess:(BOOL)success data:(NSData *)data;
 //  Delegate methods called upon completion of download in queue
+
+@optional
+
+- (void)didUpdateProgressForItemAtURL:(NSURL *)url withProgress:(double)progress;
+//  Delegate method called when progress has been made on an existing queued download
 
 @end
 
