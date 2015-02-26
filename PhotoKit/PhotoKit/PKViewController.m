@@ -76,6 +76,8 @@
     // ImageView, Progress, Quality, Completion, & Priority Test
     //
     
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunreachable-code"
 #if GIFtest
     url1 = [NSURL URLWithString:@"http://i.imgur.com/SgJL6s1.gif"];
     url2 = [NSURL URLWithString:@"http://i.imgur.com/efLzzql.jpg"];
@@ -83,6 +85,7 @@
     url1 = [NSURL URLWithString:@"http://i.imgur.com/o9YljxY.jpg"];
     url2 = [NSURL URLWithString:@"http://i.imgur.com/ftd1YIk.png"];
 #endif
+#pragma clang diagnostic pop
     
     [_imageView1 setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:1.0]];
     [_imageView2 setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:1.0]];

@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [self.view setBackgroundColor:[UIColor lightGrayColor]];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:FKAccountsDidChangeNotification object:FKSharedAccountsStore queue:nil usingBlock:^(NSNotification *notification){
         NSLog(@"Accounts Updated");

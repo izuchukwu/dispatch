@@ -46,13 +46,8 @@
 		862CC0241A9DD9C600E321CD /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CC0031A9DD9C600E321CD /* UIImage+WebP.m */; };
 		862CC0251A9DD9C600E321CD /* FLAnimatedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CC0061A9DD9C600E321CD /* FLAnimatedImage.m */; };
 		862CC0261A9DD9C600E321CD /* FLAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CC0081A9DD9C600E321CD /* FLAnimatedImageView.m */; };
-		862CC0271A9DD9C600E321CD /* PKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CC00B1A9DD9C600E321CD /* PKAppDelegate.m */; };
-		862CC0281A9DD9C600E321CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 862CC00D1A9DD9C600E321CD /* Main.storyboard */; };
-		862CC0291A9DD9C600E321CD /* PKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CC00F1A9DD9C600E321CD /* PKViewController.m */; };
-		862CC02A1A9DD9C600E321CD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 862CC0101A9DD9C600E321CD /* Images.xcassets */; };
-		862CC02B1A9DD9C600E321CD /* PhotoKit-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 862CC0111A9DD9C600E321CD /* PhotoKit-Info.plist */; };
-		862CC02C1A9DD9C600E321CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 862CC0131A9DD9C600E321CD /* InfoPlist.strings */; };
-		862CC02D1A9DD9C600E321CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CC0141A9DD9C600E321CD /* main.m */; };
+		862CC0631A9EB5C300E321CD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 862CC0621A9EB5C300E321CD /* Security.framework */; };
+		862CC0651A9EB5C800E321CD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 862CC0641A9EB5C800E321CD /* CoreGraphics.framework */; };
 		869F90F11A9DD6590096FC30 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90F01A9DD6590096FC30 /* main.m */; };
 		869F90F41A9DD6590096FC30 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90F31A9DD6590096FC30 /* AppDelegate.m */; };
 		869F90F71A9DD6590096FC30 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90F61A9DD6590096FC30 /* ViewController.m */; };
@@ -166,16 +161,8 @@
 		862CC0061A9DD9C600E321CD /* FLAnimatedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImage.m; sourceTree = "<group>"; };
 		862CC0071A9DD9C600E321CD /* FLAnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAnimatedImageView.h; sourceTree = "<group>"; };
 		862CC0081A9DD9C600E321CD /* FLAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImageView.m; sourceTree = "<group>"; };
-		862CC00A1A9DD9C600E321CD /* PKAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKAppDelegate.h; sourceTree = "<group>"; };
-		862CC00B1A9DD9C600E321CD /* PKAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKAppDelegate.m; sourceTree = "<group>"; };
-		862CC00C1A9DD9C600E321CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		862CC00E1A9DD9C600E321CD /* PKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKViewController.h; sourceTree = "<group>"; };
-		862CC00F1A9DD9C600E321CD /* PKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKViewController.m; sourceTree = "<group>"; };
-		862CC0101A9DD9C600E321CD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		862CC0111A9DD9C600E321CD /* PhotoKit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PhotoKit-Info.plist"; sourceTree = "<group>"; };
-		862CC0121A9DD9C600E321CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		862CC0141A9DD9C600E321CD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		862CC0151A9DD9C600E321CD /* PhotoKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PhotoKit-Prefix.pch"; sourceTree = "<group>"; };
+		862CC0621A9EB5C300E321CD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		862CC0641A9EB5C800E321CD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		869F90EB1A9DD6580096FC30 /* Dispatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dispatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		869F90EF1A9DD6590096FC30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		869F90F01A9DD6590096FC30 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -196,6 +183,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				862CC0651A9EB5C800E321CD /* CoreGraphics.framework in Frameworks */,
+				862CC0631A9EB5C300E321CD /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,7 +372,6 @@
 				862CBFEE1A9DD9C600E321CD /* PhotoKit Core */,
 				862CC0041A9DD9C600E321CD /* SDWebImage (Modified) */,
 				862CC0091A9DD9C600E321CD /* FLAnimatedImageView */,
-				862CC0171A9DD9C600E321CD /* PhotoKit */,
 			);
 			name = PhotoKit;
 			sourceTree = "<group>";
@@ -444,32 +432,6 @@
 			path = ../PhotoKit/FLAnimatedImageView;
 			sourceTree = "<group>";
 		};
-		862CC0161A9DD9C600E321CD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				862CC0111A9DD9C600E321CD /* PhotoKit-Info.plist */,
-				862CC0131A9DD9C600E321CD /* InfoPlist.strings */,
-				862CC0141A9DD9C600E321CD /* main.m */,
-				862CC0151A9DD9C600E321CD /* PhotoKit-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		862CC0171A9DD9C600E321CD /* PhotoKit */ = {
-			isa = PBXGroup;
-			children = (
-				862CC00A1A9DD9C600E321CD /* PKAppDelegate.h */,
-				862CC00B1A9DD9C600E321CD /* PKAppDelegate.m */,
-				862CC00D1A9DD9C600E321CD /* Main.storyboard */,
-				862CC00E1A9DD9C600E321CD /* PKViewController.h */,
-				862CC00F1A9DD9C600E321CD /* PKViewController.m */,
-				862CC0101A9DD9C600E321CD /* Images.xcassets */,
-				862CC0161A9DD9C600E321CD /* Supporting Files */,
-			);
-			name = PhotoKit;
-			path = ../PhotoKit/PhotoKit;
-			sourceTree = "<group>";
-		};
 		862CC02E1A9DD9DC00E321CD /* Internal */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,12 +442,22 @@
 			name = Internal;
 			sourceTree = "<group>";
 		};
+		862CC0661A9EB5CC00E321CD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				862CC0641A9EB5C800E321CD /* CoreGraphics.framework */,
+				862CC0621A9EB5C300E321CD /* Security.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		869F90E21A9DD6580096FC30 = {
 			isa = PBXGroup;
 			children = (
 				869F90ED1A9DD6590096FC30 /* Dispatch */,
 				862CBF841A9DD99200E321CD /* FeedlyKit */,
 				862CBFE61A9DD9A400E321CD /* PhotoKit */,
+				862CC0661A9EB5CC00E321CD /* Frameworks */,
 				862CC02E1A9DD9DC00E321CD /* Internal */,
 			);
 			sourceTree = "<group>";
@@ -621,12 +593,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				869F90FA1A9DD6590096FC30 /* Main.storyboard in Resources */,
-				862CC02C1A9DD9C600E321CD /* InfoPlist.strings in Resources */,
-				862CC02A1A9DD9C600E321CD /* Images.xcassets in Resources */,
-				862CC02B1A9DD9C600E321CD /* PhotoKit-Info.plist in Resources */,
 				869F90FF1A9DD6590096FC30 /* LaunchScreen.xib in Resources */,
 				869F90FC1A9DD6590096FC30 /* Images.xcassets in Resources */,
-				862CC0281A9DD9C600E321CD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,7 +623,6 @@
 				862CC0201A9DD9C600E321CD /* SDWebImageDownloaderOperation.m in Sources */,
 				862CBFD91A9DD99D00E321CD /* NSData+NXOAuth2.m in Sources */,
 				862CBFD11A9DD99D00E321CD /* FKFeed.m in Sources */,
-				862CC0291A9DD9C600E321CD /* PKViewController.m in Sources */,
 				862CBFD61A9DD99D00E321CD /* ICNetworking.m in Sources */,
 				862CBFD41A9DD99D00E321CD /* FKAuthViewController.m in Sources */,
 				862CC0231A9DD9C600E321CD /* UIImage+MultiFormat.m in Sources */,
@@ -669,8 +636,6 @@
 				862CBFD51A9DD99D00E321CD /* FKCache.m in Sources */,
 				862CC0181A9DD9C600E321CD /* FLAnimatedImageView+PhotoKit.m in Sources */,
 				862CC0191A9DD9C600E321CD /* PKPhotoStore.m in Sources */,
-				862CC02D1A9DD9C600E321CD /* main.m in Sources */,
-				862CC0271A9DD9C600E321CD /* PKAppDelegate.m in Sources */,
 				862CC01F1A9DD9C600E321CD /* SDWebImageDownloader.m in Sources */,
 				869F90F41A9DD6590096FC30 /* AppDelegate.m in Sources */,
 				862CBFE11A9DD99D00E321CD /* NXOAuth2Constants.m in Sources */,
@@ -711,22 +676,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		862CC00D1A9DD9C600E321CD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				862CC00C1A9DD9C600E321CD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		862CC0131A9DD9C600E321CD /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				862CC0121A9DD9C600E321CD /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		869F90F81A9DD6590096FC30 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

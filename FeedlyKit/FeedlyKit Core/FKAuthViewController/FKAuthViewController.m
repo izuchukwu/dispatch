@@ -31,8 +31,9 @@
 
 #pragma mark - View
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     NSLog(@"Requesting Authentication with URL: %@", [_request URL]);
@@ -46,13 +47,19 @@
     
     _webView = [[UIWebView alloc] initWithFrame:self.view.frame];
     [_webView setDelegate:self];
+    [_webView setAlpha:0.0];
     [self.view addSubview:_webView];
     [_webView loadRequest:_request];
     
     _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:self.view.frame];
     [_activityIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
-    [_activityIndicatorView setAlpha:0.0];
+    [_activityIndicatorView startAnimating];
+    [_activityIndicatorView setAlpha:1.0];
     [self.view addSubview:_activityIndicatorView];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -92,6 +99,11 @@
     } else {
         return YES;
     }
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [_activityIndicatorView setAlpha:0.0];
+    [_webView setAlpha:1.0];
 }
 
 @end

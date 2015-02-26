@@ -133,6 +133,7 @@
 				86AD52AF199847B4003FE31E /* SDWebImage (Modified) */,
 				86AD529A1998477A003FE31E /* FLAnimatedImageView */,
 				86AD524819984730003FE31E /* PhotoKit */,
+				86AD524119984730003FE31E /* Frameworks */,
 				86AD52E1199847E9003FE31E /* Internal */,
 			);
 			sourceTree = "<group>";
@@ -258,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				86AD526719984730003FE31E /* PhotoKitTests */,
-				86AD524119984730003FE31E /* Frameworks */,
 				86AD524019984730003FE31E /* Products */,
 			);
 			name = Internal;
