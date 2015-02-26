@@ -66,7 +66,7 @@
 
 - (void)didFetchCategories:(NSArray *)categories {
     NSLog(@"categories: %@", categories);
-    [_feedlyCloud fetchArticlesForStreamable:[categories firstObject] withPaginationID:nil shouldRefresh:NO];
+    [_feedlyCloud fetchArticlesForStreamable:[categories firstObject] withPaginationID:nil];
 }
 
 - (void)feedlyAuthenticationDidCompleteWithSuccess:(BOOL)success {

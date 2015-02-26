@@ -11,19 +11,18 @@
 //  the full licence.
 //
 
-#if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
-#else
-#import <Cocoa/Cocoa.h>
-#endif
-
-
 #import "NXOAuth2Client.h"
 #import "NXOAuth2Connection.h"
 #import "NXOAuth2Account.h"
 #import "NXOAuth2Account+Private.h"
 
 #import "NXOAuth2AccountStore.h"
+
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#else
+#import <Cocoa/Cocoa.h>
+#endif
 
 
 #pragma mark Notifications

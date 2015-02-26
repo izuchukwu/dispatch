@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0AB04ED7-5348-413C-B429-5F005F397281</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PhotoKit</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8D06081C7AAFCE99652B8681085E380FE9979C7B</key>
+		<string>https://github.com/izuchukwuelechi/dispatch.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PhotoKit/PhotoKit.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8D06081C7AAFCE99652B8681085E380FE9979C7B</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/izuchukwuelechi/dispatch.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8D06081C7AAFCE99652B8681085E380FE9979C7B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8D06081C7AAFCE99652B8681085E380FE9979C7B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>dispatch</string>
+		</dict>
+	</array>
+</dict>
+</plist>
