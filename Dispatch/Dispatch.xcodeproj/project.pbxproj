@@ -48,6 +48,10 @@
 		862CC0261A9DD9C600E321CD /* FLAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CC0081A9DD9C600E321CD /* FLAnimatedImageView.m */; };
 		862CC0631A9EB5C300E321CD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 862CC0621A9EB5C300E321CD /* Security.framework */; };
 		862CC0651A9EB5C800E321CD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 862CC0641A9EB5C800E321CD /* CoreGraphics.framework */; };
+		862CC0761A9EB98100E321CD /* DBackgroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CC0751A9EB98100E321CD /* DBackgroundViewController.m */; };
+		862CC07B1A9EBCA900E321CD /* NGAParallaxMotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CC07A1A9EBCA900E321CD /* NGAParallaxMotion.m */; };
+		862CC07E1A9ED49700E321CD /* DBackgroundTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CC07D1A9ED49700E321CD /* DBackgroundTestViewController.m */; };
+		862CC0831A9ED8E400E321CD /* DWindowDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CC0821A9ED8E400E321CD /* DWindowDispatch.m */; };
 		869F90F11A9DD6590096FC30 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90F01A9DD6590096FC30 /* main.m */; };
 		869F90F41A9DD6590096FC30 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90F31A9DD6590096FC30 /* AppDelegate.m */; };
 		869F90F71A9DD6590096FC30 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 869F90F61A9DD6590096FC30 /* ViewController.m */; };
@@ -163,6 +167,15 @@
 		862CC0081A9DD9C600E321CD /* FLAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImageView.m; sourceTree = "<group>"; };
 		862CC0621A9EB5C300E321CD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		862CC0641A9EB5C800E321CD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		862CC0741A9EB98100E321CD /* DBackgroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBackgroundViewController.h; path = "View Controllers/DBackgroundViewController.h"; sourceTree = "<group>"; };
+		862CC0751A9EB98100E321CD /* DBackgroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBackgroundViewController.m; path = "View Controllers/DBackgroundViewController.m"; sourceTree = "<group>"; };
+		862CC0791A9EBCA900E321CD /* NGAParallaxMotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGAParallaxMotion.h; sourceTree = "<group>"; };
+		862CC07A1A9EBCA900E321CD /* NGAParallaxMotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGAParallaxMotion.m; sourceTree = "<group>"; };
+		862CC07C1A9ED49700E321CD /* DBackgroundTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBackgroundTestViewController.h; path = "View Controllers/DBackgroundTestViewController.h"; sourceTree = "<group>"; };
+		862CC07D1A9ED49700E321CD /* DBackgroundTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBackgroundTestViewController.m; path = "View Controllers/DBackgroundTestViewController.m"; sourceTree = "<group>"; };
+		862CC07F1A9ED62E00E321CD /* DCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DCommon.h; path = Common/DCommon.h; sourceTree = "<group>"; };
+		862CC0811A9ED8E400E321CD /* DWindowDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DWindowDispatch.h; path = "Window Dispatcher/DWindowDispatch.h"; sourceTree = SOURCE_ROOT; };
+		862CC0821A9ED8E400E321CD /* DWindowDispatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DWindowDispatch.m; path = "Window Dispatcher/DWindowDispatch.m"; sourceTree = SOURCE_ROOT; };
 		869F90EB1A9DD6580096FC30 /* Dispatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dispatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		869F90EF1A9DD6590096FC30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		869F90F01A9DD6590096FC30 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -451,12 +464,54 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		862CC0731A9EB95000E321CD /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				862CC0741A9EB98100E321CD /* DBackgroundViewController.h */,
+				862CC0751A9EB98100E321CD /* DBackgroundViewController.m */,
+				862CC07C1A9ED49700E321CD /* DBackgroundTestViewController.h */,
+				862CC07D1A9ED49700E321CD /* DBackgroundTestViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		862CC0771A9EBC9D00E321CD /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				862CC0781A9EBCA900E321CD /* NGAParallaxMotion */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		862CC0781A9EBCA900E321CD /* NGAParallaxMotion */ = {
+			isa = PBXGroup;
+			children = (
+				862CC0791A9EBCA900E321CD /* NGAParallaxMotion.h */,
+				862CC07A1A9EBCA900E321CD /* NGAParallaxMotion.m */,
+			);
+			path = NGAParallaxMotion;
+			sourceTree = "<group>";
+		};
+		862CC0801A9ED8B100E321CD /* Window Dispatch */ = {
+			isa = PBXGroup;
+			children = (
+				862CC0811A9ED8E400E321CD /* DWindowDispatch.h */,
+				862CC0821A9ED8E400E321CD /* DWindowDispatch.m */,
+			);
+			name = "Window Dispatch";
+			path = Dispatch;
+			sourceTree = "<group>";
+		};
 		869F90E21A9DD6580096FC30 = {
 			isa = PBXGroup;
 			children = (
+				862CC07F1A9ED62E00E321CD /* DCommon.h */,
+				862CC0731A9EB95000E321CD /* View Controllers */,
+				862CC0801A9ED8B100E321CD /* Window Dispatch */,
 				869F90ED1A9DD6590096FC30 /* Dispatch */,
 				862CBF841A9DD99200E321CD /* FeedlyKit */,
 				862CBFE61A9DD9A400E321CD /* PhotoKit */,
+				862CC0771A9EBC9D00E321CD /* Libraries */,
 				862CC0661A9EB5CC00E321CD /* Frameworks */,
 				862CC02E1A9DD9DC00E321CD /* Internal */,
 			);
@@ -624,6 +679,8 @@
 				862CBFD91A9DD99D00E321CD /* NSData+NXOAuth2.m in Sources */,
 				862CBFD11A9DD99D00E321CD /* FKFeed.m in Sources */,
 				862CBFD61A9DD99D00E321CD /* ICNetworking.m in Sources */,
+				862CC0761A9EB98100E321CD /* DBackgroundViewController.m in Sources */,
+				862CC0831A9ED8E400E321CD /* DWindowDispatch.m in Sources */,
 				862CBFD41A9DD99D00E321CD /* FKAuthViewController.m in Sources */,
 				862CC0231A9DD9C600E321CD /* UIImage+MultiFormat.m in Sources */,
 				862CC0251A9DD9C600E321CD /* FLAnimatedImage.m in Sources */,
@@ -634,6 +691,7 @@
 				862CBFDF1A9DD99D00E321CD /* NXOAuth2Client.m in Sources */,
 				862CBFDE1A9DD99D00E321CD /* NXOAuth2AccountStore.m in Sources */,
 				862CBFD51A9DD99D00E321CD /* FKCache.m in Sources */,
+				862CC07E1A9ED49700E321CD /* DBackgroundTestViewController.m in Sources */,
 				862CC0181A9DD9C600E321CD /* FLAnimatedImageView+PhotoKit.m in Sources */,
 				862CC0191A9DD9C600E321CD /* PKPhotoStore.m in Sources */,
 				862CC01F1A9DD9C600E321CD /* SDWebImageDownloader.m in Sources */,
@@ -654,6 +712,7 @@
 				862CC01B1A9DD9C600E321CD /* NSData+ImageContentType.m in Sources */,
 				862CBFDC1A9DD99D00E321CD /* NXOAuth2AccessToken.m in Sources */,
 				862CBFD31A9DD99D00E321CD /* FKProfile.m in Sources */,
+				862CC07B1A9EBCA900E321CD /* NGAParallaxMotion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

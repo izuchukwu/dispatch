@@ -10,7 +10,7 @@
 
 #import "PhotoKit.h"
 
-#define CacheTest 1
+#define CacheTest 0
 
 #define GIFtest 0
 

@@ -7,8 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "DWindowDispatch.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic) DWindowDispatch *dispatch;
 
 @end
 
@@ -16,7 +19,22 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    UIViewController *homeViewController = [[UIViewController alloc] init];
+    
+    UILabel *lbl = [[UILabel alloc] initWithFrame:homeViewController.view.frame];
+    [lbl setText:@"homevc"];
+    [lbl setTextAlignment:NSTextAlignmentRight];
+    [homeViewController.view addSubview:lbl];
+    
+    _dispatch = [[DWindowDispatch alloc] init];
+    
+    NSLog(@"control: %@", [[UIApplication sharedApplication] windows]);
+    [_dispatch dispatchWindowWithViewController:(UIViewController<DWindowDispatchable> *)homeViewController];
+    NSLog(@"after dispatch: %@", [[UIApplication sharedApplication] windows]);
+    //[_dispatch recallWindow];
+    //NSLog(@"after recall: %@", [[UIApplication sharedApplication] windows]);
+    
     return YES;
 }
 
