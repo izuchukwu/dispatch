@@ -1,2 +1,2 @@
 # dispatch
-The reader with personality. A more typographically-focused &amp; lively way to read Feedly.
+The reader with personality. A simpler, more focused way to read.

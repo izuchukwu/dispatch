@@ -2,16 +2,15 @@
 //  AppDelegate.m
 //  Dispatch
 //
-//  Created by Izuchukwu Elechi on 2/25/15.
+//  Created by Izuchukwu Elechi on 9/14/15.
 //  Copyright (c) 2015 Izuchukwu Elechi. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "DWindowDispatch.h"
+#import <Fabric/Fabric.h>
+#import <TwitterKit/TwitterKit.h>
 
 @interface AppDelegate ()
-
-@property (nonatomic) DWindowDispatch *dispatch;
 
 @end
 
@@ -19,22 +18,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    UIViewController *homeViewController = [[UIViewController alloc] init];
-    
-    UILabel *lbl = [[UILabel alloc] initWithFrame:homeViewController.view.frame];
-    [lbl setText:@"homevc"];
-    [lbl setTextAlignment:NSTextAlignmentRight];
-    [homeViewController.view addSubview:lbl];
-    
-    _dispatch = [[DWindowDispatch alloc] init];
-    
-    NSLog(@"control: %@", [[UIApplication sharedApplication] windows]);
-    [_dispatch dispatchWindowWithViewController:(UIViewController<DWindowDispatchable> *)homeViewController];
-    NSLog(@"after dispatch: %@", [[UIApplication sharedApplication] windows]);
-    //[_dispatch recallWindow];
-    //NSLog(@"after recall: %@", [[UIApplication sharedApplication] windows]);
-    
+    // Override point for customization after application launch.
+    [[Twitter sharedInstance] startWithConsumerKey:@"8PDWLoCTbO4hlC6Wh3rTyXWY8" consumerSecret:@"oaTGhbQMGac8Nd6kGp6LlaBRzO0B9OKsX3EQOUwYixTAg1iCqm"];
+    [Fabric with:@[[Twitter sharedInstance]]];
     return YES;
 }
 
